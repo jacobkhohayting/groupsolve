@@ -1,5 +1,5 @@
 /* =========================================================
-   GroupSolve â€” shared site styles
+   GroupSolve — shared site styles
    Edit the color variables below to quickly re-theme the site.
    ========================================================= */
 
@@ -430,7 +430,7 @@ ol {
 
 .dropdown-link::after {
   color: var(--teal);
-  content: "â†’";
+  content: "→";
   opacity: 0;
   transform: translateX(-6px);
   transition: opacity var(--transition), transform var(--transition);
