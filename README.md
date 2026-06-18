@@ -22,9 +22,9 @@ Open `index.html` in a browser. All page links work locally because the site use
 
 ## Quick edits
 
-- Site colors: edit the variables at the top of `css/styles.css`.
+- Site colors: edit the variables at the top of `styles.css`.
 - Text and dates: edit the relevant HTML page.
-- Logo: replace `assets/groupsolve-logo.png` with another PNG using the same filename.
+- Logo: replace `groupsolve-logo.png` with another PNG using the same filename.
 - Contact address: search the project for `hello@groupsolve.org`.
 - Forms: the included forms are visual demos. Connect them to Formspree, Google Forms, Netlify Forms, or your own backend before publishing.
 - Google Fonts are loaded from the web. The site falls back to common system fonts when offline.
