@@ -107,15 +107,52 @@
   });
 
   // Demo forms: show a clear message instead of pretending data was submitted.
-  document.querySelectorAll('[data-demo-form]').forEach((form) => {
-    form.addEventListener('submit', (event) => {
-      event.preventDefault();
-      const status = form.querySelector('.form-status');
-      if (status) {
-        status.textContent = 'Thanks! This demo form is ready to connect to your preferred form service.';
+// Contact forms: submit through Web3Forms.
+document.querySelectorAll('[data-demo-form]').forEach((form) => {
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const status = form.querySelector('.form-status');
+    const button = form.querySelector('button[type="submit"]');
+
+    if (!status || !button) return;
+
+    const originalButtonText = button.innerHTML;
+
+    status.textContent = '';
+    button.disabled = true;
+    button.innerHTML = 'Sending…';
+
+    try {
+      const formData = new FormData(form);
+
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          Accept: 'application/json'
+        }
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        status.textContent = 'Thanks! Your message has been sent.';
+        form.reset();
+      } else {
+        status.textContent =
+          result.message || 'Something went wrong. Please try again.';
       }
-    });
+    } catch (error) {
+      console.error('Web3Forms error:', error);
+      status.textContent =
+        'Something went wrong. Please try again.';
+    } finally {
+      button.disabled = false;
+      button.innerHTML = originalButtonText;
+    }
   });
+});
 
   document.querySelectorAll('[data-current-year]').forEach((item) => {
     item.textContent = new Date().getFullYear();
